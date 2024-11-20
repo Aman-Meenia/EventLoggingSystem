@@ -1,4 +1,4 @@
-## I used react , nodejs, joi , mongodb ,zod, shadcn , Docker , Nginx to develop this project
+## Tech stack used react , nodejs, joi , mongodb ,zod, shadcn , Docker , Nginx to develop this project
 
 ## Folder structure
 
