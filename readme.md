@@ -12,7 +12,13 @@
 
 ## How to run the project
 
-#### 1. Run the docker compose file to run the backend server with multiple replicas for horizontal scaling
+#### 1. Firstly create a .env file in server folder 
+```
+PORT = 3000
+MONGO_URI="MongoDB url"
+```
+
+#### 2. Run the docker compose file to run the backend server with multiple replicas for horizontal scaling
 
 ```
 cd docker
