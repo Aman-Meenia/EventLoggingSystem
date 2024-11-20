@@ -1,5 +1,4 @@
-## Tech stack used react , nodejs, joi , mongodb ,zod, shadcn , Docker , Nginx to develop this project
-
+## Tech stack used ReactJs, NodeJs, Joi, Mongodb, Zod, Shadcn, Docker, Nginx
 ## Folder structure
 
 #### 1. client -> Contains frontend code
