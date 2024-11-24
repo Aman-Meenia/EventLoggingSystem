@@ -19,9 +19,6 @@ import eventRoute from "./routes/eventRoute.js";
 import ConnectDB from "./db/connectDB.js";
 
 app.use("/api/events", eventRoute);
-app.get("/", (req, res) => {
-  res.send("Hello Aman Meenia");
-});
 
 const PORT = process.env.PORT;
 const startServer = async () => {

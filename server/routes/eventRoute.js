@@ -1,7 +1,6 @@
 import express from "express";
 import {
   createEvent,
-  getEvents,
   searchByDate,
   searchBySourceAppId,
   searchEvents,
