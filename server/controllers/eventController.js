@@ -1,5 +1,6 @@
 import Event, { eventTypes } from "../modals/eventModal.js";
 import Joi from "joi";
+import ApiResponse from "../utils/ApiResponse.js";
 
 // Defining valiation for the event data
 const eventValidationSchema = Joi.object({
@@ -37,11 +38,7 @@ export const createEvent = async (req, res) => {
 
     await newEvent.save();
 
-    return res.status(200).json({
-      success: true,
-      message: "Event saved successfully",
-      messages: {},
-    });
+    return ApiResponse.successResponse(res, 200, "Event saved successfully");
   } catch (err) {
     console.log("Error:", err);
 
@@ -50,18 +47,10 @@ export const createEvent = async (req, res) => {
       : "Internal server error";
 
     if (errorMessage === "Inernal server error") {
-      return res.status(500).json({
-        success: false,
-        message: errorMessage,
-        messages: {},
-      });
+      return ApiResponse.errorResponse(res, 500, errorMessage);
     }
 
-    return res.status(400).json({
-      success: false,
-      message: errorMessage,
-      messages: {},
-    });
+    return ApiResponse.errorResponse(res, 400, errorMessage);
   }
 };
 
@@ -116,29 +105,27 @@ export const searchEvents = async (req, res) => {
 
     console.log("Events ");
     console.log(events);
-    return res.status(200).json({
-      success: true,
-      message: "Events fetched successfully",
-      messages: { data: events, totalSize: totalSize },
-    });
+
+    const messages = {
+      data: events,
+      totalSize: totalSize,
+    };
+    return ApiResponse.successResponse(
+      res,
+      200,
+      "Events fetched successfully successfully",
+      messages,
+    );
   } catch (err) {
     const errorMessage = err.isJoi
       ? err.details[0].message
       : "Internal server error";
 
     if (errorMessage === "Inernal server error") {
-      return res.status(500).json({
-        success: false,
-        message: errorMessage,
-        messages: {},
-      });
+      return ApiResponse.errorResponse(res, 500, errorMessage);
     }
 
-    return res.status(400).json({
-      success: false,
-      message: errorMessage,
-      messages: {},
-    });
+    return ApiResponse.errorResponse(res, 400, errorMessage);
   }
 };
 
@@ -173,31 +160,26 @@ export const searchByDate = async (req, res) => {
     )
       .skip((page - 1) * limit)
       .limit(limit);
-    console.log(events);
+    // console.log(events);
 
-    return res.status(200).json({
-      success: true,
-      message: "Events fetched successfully",
-      messages: { events },
-    });
+    const messages = {
+      data: events,
+    };
+    return ApiResponse.successResponse(
+      res,
+      200,
+      "Events fetched successfully",
+      messages,
+    );
   } catch (err) {
     const errorMessage = err.isJoi
       ? err.details[0].message
       : "Internal server error";
 
     if (errorMessage === "Inernal server error") {
-      return res.status(500).json({
-        success: false,
-        message: errorMessage,
-        messages: {},
-      });
+      return ApiResponse.errorResponse(res, 500, errorMessage);
     }
-
-    return res.status(400).json({
-      success: false,
-      message: errorMessage,
-      messages: {},
-    });
+    return ApiResponse.errorResponse(res, 400, errorMessage);
   }
 };
 
@@ -230,49 +212,26 @@ export const searchBySourceAppId = async (req, res) => {
       .skip((page - 1) * limit)
       .limit(limit);
 
-    console.log(events);
+    // console.log(events);
 
-    return res.status(200).json({
-      success: true,
-      message: "Events fetched successfully",
-      messages: { events },
-    });
+    const messages = {
+      data: events,
+    };
+    return ApiResponse.successResponse(
+      res,
+      200,
+      "Events fetched successfully",
+      messages,
+    );
   } catch (err) {
     const errorMessage = err.isJoi
       ? err.details[0].message
       : "Internal server error";
 
     if (errorMessage === "Internal server error") {
-      return res.status(500).json({
-        success: false,
-        message: errorMessage,
-        messages: {},
-      });
+      return ApiResponse.errorResponse(res, 500, errorMessage);
     }
 
-    return res.status(400).json({
-      success: false,
-      message: errorMessage,
-      messages: {},
-    });
-  }
-};
-
-// <--------------------- GET ALL LOGS---------------------->
-
-export const getEvents = async (req, res) => {
-  try {
-    const events = await Event.find({});
-    return res.status(500).json({
-      success: true,
-      message: "Data fetched successfully",
-      messages: { data: events },
-    });
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-      messages: {},
-    });
+    return ApiResponse.errorResponse(res, 400, errorMessage);
   }
 };
